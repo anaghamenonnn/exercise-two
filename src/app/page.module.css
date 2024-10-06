@@ -1,165 +1,94 @@
-.page {
-  --gray-rgb: 0, 0, 0;
-  --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
-  --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
-
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-
-  display: grid;
-  grid-template-rows: 20px 1fr 20px;
-  align-items: center;
-  justify-items: center;
-  min-height: 100svh;
-  padding: 80px;
-  gap: 64px;
-  font-family: var(--font-geist-sans);
+.titleContainer {
+  margin-left: 0; /* Aligns the title with the content */
+  padding-left: 0; /* Removes any unnecessary padding */
+  text-align: left; /* Ensure it's aligned left */
 }
 
-@media (prefers-color-scheme: dark) {
-  .page {
-    --gray-rgb: 255, 255, 255;
-    --gray-alpha-200: rgba(var(--gray-rgb), 0.145);
-    --gray-alpha-100: rgba(var(--gray-rgb), 0.06);
-
-    --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
-  }
+.pageWrapper h1 {
+  margin: 0 auto;
+  max-width: 900px;
 }
 
-.main {
+.articlesContainer {
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  grid-row-start: 2;
+  align-items: center; /* Center the articles container */
+  gap: 30px; /* Increase space between each article */
+  padding: 40px 20px; /* Add padding to the top and sides */
+  margin-left: 0; /* Same left margin as the title */
+  padding-left: 0; /* Align with the title container */
 }
 
-.main ol {
-  font-family: var(--font-geist-mono);
-  padding-left: 0;
-  margin: 0;
-  font-size: 14px;
-  line-height: 24px;
-  letter-spacing: -0.01em;
-  list-style-position: inside;
+.titleContainer,
+.articlesContainer {
+  max-width: 100%; /* Set the maximum width to ensure it's full-width */
+  margin: 0 auto; /* Centers the container if needed */
+  padding-left: 20px; /* Ensure it's aligned with the content */
 }
 
-.main li:not(:last-of-type) {
-  margin-bottom: 8px;
-}
-
-.main code {
-  font-family: inherit;
-  background: var(--gray-alpha-100);
-  padding: 2px 4px;
-  border-radius: 4px;
-  font-weight: 600;
-}
-
-.ctas {
+.articleCard {
+  width: 100%;
+  max-width: 900px; /* Set a max width for the cards */
+  border: 1px solid rgb(57, 108, 235);
+  padding: 20px;
+  background-color: rgb(187, 215, 246);
   display: flex;
-  gap: 16px;
+  align-items: flex-start;
+  gap: 20px; /* Adds space between the image and the text */
+  margin: 0 auto; /* Center the article card */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for a card effect */
 }
 
-.ctas a {
-  appearance: none;
-  border-radius: 128px;
-  height: 48px;
-  padding: 0 20px;
-  border: none;
-  border: 1px solid transparent;
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
-  cursor: pointer;
+.articleImage {
+  width: 150px; /* Fixed width for image */
+  height: 150px; /* Fixed height for image */
+  background-color: #ddd; /* Placeholder background for the image */
+  flex-shrink: 0; /* Prevent image from shrinking */
+}
+
+.articleContent {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  line-height: 20px;
-  font-weight: 500;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
-a.primary {
-  background: var(--foreground);
-  color: var(--background);
-  gap: 8px;
+.articleTitle {
+  font-size: 1.7rem; /* Slightly larger for emphasis */
+  font-weight: bold;
+  margin-bottom: 10px; /* Spacing between title and date */
+  text-align: left; /* Align text to the left */
 }
 
-a.secondary {
-  border-color: var(--gray-alpha-200);
-  min-width: 180px;
+.articleDate {
+  font-size: 1rem;
+  color: #777;
+  margin-bottom: 15px; /* Increase spacing between date and blurb */
+  text-align: left; /* Align text to the left */
 }
 
-.footer {
-  grid-row-start: 3;
-  display: flex;
-  gap: 24px;
+.articleBlurb {
+  font-size: 1rem;
+  margin-bottom: 20px; /* Spacing between blurb and "Read More" */
+  text-align: left; /* Align text to the left */
 }
 
-.footer a {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.articleLink {
+  color: blue;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: left; /* Align text to the left */
 }
 
-.footer img {
-  flex-shrink: 0;
+.articleLink:hover {
+  text-decoration: underline;
 }
 
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  a.primary:hover {
-    background: var(--button-primary-hover);
-    border-color: transparent;
-  }
-
-  a.secondary:hover {
-    background: var(--button-secondary-hover);
-    border-color: transparent;
-  }
-
-  .footer a:hover {
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
+.articleBody {
+  margin: 40px auto;
+  max-width: 640px;
 }
 
-@media (max-width: 600px) {
-  .page {
-    padding: 32px;
-    padding-bottom: 80px;
-  }
-
-  .main {
-    align-items: center;
-  }
-
-  .main ol {
-    text-align: center;
-  }
-
-  .ctas {
-    flex-direction: column;
-  }
-
-  .ctas a {
-    font-size: 14px;
-    height: 40px;
-    padding: 0 16px;
-  }
-
-  a.secondary {
-    min-width: auto;
-  }
-
-  .footer {
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
-  }
+.pageHeaderText {
+  margin: 0 auto;
+  max-width: 640px;
 }
