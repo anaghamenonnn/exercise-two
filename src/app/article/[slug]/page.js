@@ -1,45 +1,23 @@
-import data from "../../data.json"; 
-import styles from "../../page.module.css"; 
-import ArticleTextDisplay from "../../components/ArticleTextDisplay";
+import data from "../../data.json";
+import styles from "../../page.module.css";
+import ArticleTextDisplay from "../../components/articleTextDisplay.js";
+import { formatDateForArticle } from "@/app/components/utils";
 
-export default function Article({ params }) {
-  const slug = params.slug;
-
-  // Find the article using the slug
-  const articleData = data.find((article) => slug === article.id);
-
-  return (
-    <main className={styles.pageWrapper}>
-      <div
-        className={styles.articlePageHeaderWrapper}
-        style={{
-          backgroundImage: articleData.image?.url
-            ? `url(${articleData.image.url})`
-            : "none", 
-          backgroundSize: "cover",
-          padding: "60px 20px",
-          color: "#fff",
-        }}
-      >
-        <div className={styles.pageHeaderText}>
-          {/* Title */}
-          <h1 className={styles.articleTitle}>{articleData.title}</h1>
-
-          {/* Date */}
-          <p className={styles.articleDate}>
-            {new Date(articleData.publishedDate).toDateString()}
-          </p>
-          {/* Blurb */}
-          <p className={styles.articleBlurb}>{articleData.blurb}</p>
-        </div>
-      </div>
-
-      {/* Article Body */}
-      <div className={styles.articleBody}>
-        {articleData.articleText?.map((text, i) => (
-          <ArticleTextDisplay key={i} data={text.data} type={text.type} />
-        ))}
-      </div>
-    </main>
-  );
+export default function Article({ params }){
+    const slug = params.slug;
+    const articleData = data.find((article) => slug === article.id);
+    return (
+        <main>
+            <div className={styles.articlePageHeaderWrapper}>
+                <h1>{articleData.title}</h1>
+                <p>{formatDateForArticle(articleData.publishedDate)}</p>
+                <p className={styles.articlePageHeaderBlurb}>{articleData.blurb}</p>
+            </div>
+            <div className={styles.articleTextWrapper}>
+                {articleData?.articleText?.map((text, i) => (
+                    <ArticleTextDisplay key={i} data={text.data} type={text.type}></ArticleTextDisplay>
+                ))}
+            </div>
+        </main>
+    );
 }

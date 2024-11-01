@@ -1,22 +1,19 @@
-import Link from 'next/link';
-import styles from '../page.module.css'; 
+import Link from "next/link";
+import styles from "../page.module.css";
+import { formatDateForArticle } from "./utils";
 
-export default function ArticleCard({ title, date, blurb, id }) {
+export default function ArticleCard({ blurb, image, id, publishedDate, title }) {
+    const freshDate = new Date(publishedDate);
+    const formattedDate = `${freshDate.getMonth() + 1}/${freshDate.getDay()}/${freshDate.getFullYear()}`;
     return (
-      <div className={styles.articleCard}>
-        <div className={styles.articleImage}>
-          {/* Image placeholder */}
+        <div className={styles.articleCardWrapper}>
+            <img src={image.url} alt={image.alt}/>
+            <div className={styles.articleCardText}>
+                <h2>{title}</h2>
+                <p className={styles.articleCardDate}>{formatDateForArticle(publishedDate)}</p>
+                <p>{blurb}</p>
+                <Link href={`article/${id}`}>Read More</Link>
+            </div>
         </div>
-        <div className={styles.articleContent}>
-          <h2 className={styles.articleTitle}>{title}</h2>
-          <p className={styles.articleDate}>
-            {new Date(date).toDateString() !== "Invalid Date" ? new Date(date).toDateString() : "Date not available"}
-          </p>
-          <p className={styles.articleBlurb}>{blurb}</p>
-          <Link href={`/article/${id}`} className={styles.articleLink}>
-            Read More
-          </Link>
-        </div>
-      </div>
     );
-  }
+}
